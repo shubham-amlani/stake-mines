@@ -39,27 +39,30 @@ const GamePage = ({ amount, setAmount, user, setUser, username, handleUpdateWall
       settileFetching(newFetching);
 
       setoneTileOpened(true);
-  
+
       const tileCoords = e.target.getAttribute('coords');
       const openTileData = { tileCoords, username };
       const response = await openTileApi(user.token, openTileData);
-      const gameArray = response.gameArray;
+      let gameArray;
+      if(response.gameArray){
+        gameArray = response.gameArray;
+      }
       setprofitMultiple(response.profit);
       const newRevealed = [...revealed];
       newRevealed[index] = true;
       setRevealed(newRevealed);
-  
+
       const newTileResults = [...tileResults];
       if (response.gem) {
         newTileResults[index] = 'gem';
         playSound("/sounds/gem.mp3");
-      } else {
+      } else if (response.mine) {
         newTileResults[index] = 'mine';
         playSound("/sounds/mine.mp3");
         setstartGame(false);
-        allRevealed(gameArray);
         setcahsoutModalState(true);
         setshowProfit(false);
+        allRevealed(gameArray);
       }
       setTileResults(newTileResults);
 
@@ -68,9 +71,10 @@ const GamePage = ({ amount, setAmount, user, setUser, username, handleUpdateWall
     }
   };
 
-  const allRevealed = (gameArray) => {
+
+  const allRevealed = async (gameArray) => {
+    const newArray = await gameArray.map((item)=>item===1?'mine':'gem');
     setRevealed(Array(25).fill(true));
-    const newArray = gameArray.map((item)=>item===1?'mine':'gem'); //this array will be fetched from database on gameEnd
     setTileResults(newArray);
   };
 

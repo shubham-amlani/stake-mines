@@ -1,5 +1,5 @@
-// const API_URL = 'http://192.168.0.103:5000/api';
-const API_URL = 'https://stake-mines-backend.onrender.com/api';
+const API_URL = 'http://192.168.0.103:5000/api';
+// const API_URL = 'https://stake-mines-backend.onrender.com/api';
 
 export async function authenticate(username, password) {
     const response = await fetch(`${API_URL}/authenticate`, {
