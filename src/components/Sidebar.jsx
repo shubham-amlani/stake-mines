@@ -78,7 +78,7 @@ const Sidebar = ({
       <div className="bet-form">
         <div className="flex justify-between mx-4">
           <span className="text-sm text-gray-400 font-bold">Bet Amount</span>
-          <span className="text-sm text-gray-400 font-bold">₹0.00</span>
+          <span className="text-sm text-gray-400 font-bold">₹{betamount}</span>
         </div>
         <div className="input-div mx-4 my-1 flex">
           <input
@@ -89,13 +89,12 @@ const Sidebar = ({
             onChange={betInput}
             value={betamount}
           />
-          <span className="half font-bold text-sm text-white p-2 cursor-pointer">
-            {" "}
+          <button className="half font-bold text-sm text-white p-2 cursor-pointer" onClick={()=>{setbetamount(betamount/=2)}}>
             1/2
-          </span>
-          <span className="double font-bold text-sm text-white p-2 cursor-pointer">
+          </button>
+          <button className="double font-bold text-sm text-white p-2 cursor-pointer" onClick={()=>{setbetamount(betamount*=2)}}>
             2x
-          </span>
+          </button>
         </div>
 
         <div className="flex justify-between mx-4 my-1">

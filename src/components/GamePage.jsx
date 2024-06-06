@@ -14,7 +14,7 @@ const GamePage = ({ amount, setAmount, user, setUser, username, handleUpdateWall
   const [oneTileOpened, setoneTileOpened] = useState(false);
   const [profitMultiple, setprofitMultiple] = useState("1.00");
   const [showProfit, setshowProfit] = useState(false);
-  const [betamount, setbetamount] = useState("0.00");
+  const [betamount, setbetamount] = useState(0.00);
   const [disableGrid, setDisableGrid] = useState(false);
   const [loading, setloading] = useState(false);
 
@@ -136,6 +136,7 @@ const GamePage = ({ amount, setAmount, user, setUser, username, handleUpdateWall
           betamount={betamount}
           setbetamount={setbetamount}
           tileFetching={tileFetching}
+          loading={loading}
         />
 
       </div>

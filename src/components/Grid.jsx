@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Tile from "./Tile";
 import CahsoutModal from "./CashoutModal";
+import MoonLoader from "react-spinners/MoonLoader";
 
 const Grid = ({
   startGame,
@@ -11,7 +12,8 @@ const Grid = ({
   cahsoutModalState,
   profitMultiple,
   betamount,
-  tileFetching
+  tileFetching,
+  loading
 }) => {
   const handleTileClick = async (index, e) => {
     const response = await onTileClick(index, e);
@@ -30,6 +32,19 @@ const Grid = ({
             cashoutAmount={profitMultiple * betamount}
           />
         )}
+         {loading && (
+          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
+            <MoonLoader
+              loading={loading}
+              size={150}
+              color="#1fff20"
+              className="absolute"
+              aria-label="Loading Spinner"
+              data-testid="loader"
+            />
+          </div>
+        )}
+
         <div className="grid-inner grid grid-cols-5 grid-rows-5 gap-2 md:py-5 sm:py-3 lg:w-[590px] md:w-[440px] sm:w-[440px] w-[300px] py-2">
           {revealed.map((isRevealed, index) => (
             <Tile
