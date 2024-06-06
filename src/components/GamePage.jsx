@@ -43,7 +43,7 @@ const GamePage = ({ amount, setAmount, user, setUser, username, handleUpdateWall
       const tileCoords = e.target.getAttribute('coords');
       const openTileData = { tileCoords, username };
       const response = await openTileApi(user.token, openTileData);
-
+      const gameArray = response.gameArray;
       setprofitMultiple(response.profit);
       const newRevealed = [...revealed];
       newRevealed[index] = true;
@@ -57,7 +57,6 @@ const GamePage = ({ amount, setAmount, user, setUser, username, handleUpdateWall
         newTileResults[index] = 'mine';
         playSound("/sounds/mine.mp3");
         setstartGame(false);
-        const gameArray = response.gameArray;
         allRevealed(gameArray);
         setcahsoutModalState(true);
         setshowProfit(false);
