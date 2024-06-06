@@ -186,5 +186,9 @@ select{
   }
 }
 
+.loading{
+  background-color: #00e701;
+}
+
 /* background-color: #2f4553; */
   /* box-shadow: #213743; */

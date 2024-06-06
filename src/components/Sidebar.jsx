@@ -3,6 +3,7 @@ import { playSound } from "./SoundPlayer";
 import { startGameApi, cashoutClickApi } from "../Api";
 import { FaBomb } from "react-icons/fa";
 import Alert, { showAlert } from "./Alert";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const Sidebar = ({
   startGame,
@@ -22,23 +23,26 @@ const Sidebar = ({
   setprofitMultiple,
   betamount,
   setbetamount,
-  cashoutClick
+  cashoutClick,
 }) => {
   const [Mines, setMines] = useState(3);
+  const [loading, setloading] = useState(false);
 
   const betClick = async () => {
     if (amount < betamount) {
       showAlert("Insufficient balance");
       return;
     }
+    setloading("true");
     setoneTileOpened(false);
     setcahsoutModalState(false);
     resetRevealed();
     playSound("/sounds/click.mp3");
-    setprofitMultiple(0)
+    setprofitMultiple(0);
 
     const betData = { mines: Mines, betamount: betamount, username: username };
     const response = await startGameApi(user.token, betData);
+    setloading(false);
 
     if (response.activegame) {
       showAlert("Active game running for this user");
@@ -123,7 +127,11 @@ const Sidebar = ({
               name="bet-amount"
               id=""
               className="rounded-sm h-9 w-[90%] p-2 mx-auto text-white font-bold text-sm"
-              value={oneTileOpened?((betamount * profitMultiple)-betamount).toFixed(2):'0.00'}
+              value={
+                oneTileOpened
+                  ? (betamount * profitMultiple - betamount).toFixed(2)
+                  : "0.00"
+              }
               readOnly={true}
             />
           </div>
@@ -133,7 +141,21 @@ const Sidebar = ({
           disabled={!oneTileOpened && startGame}
           onClick={startGame ? cashoutClick : betClick}
         >
-          {startGame ? "Cashout" : "Bet"}
+          {!loading ? (
+            startGame ? (
+              "Cashout"
+            ) : (
+              "Bet"
+            )
+          ) : (
+            <ClipLoader
+              loading={loading}
+              size={20}
+              className="loading"
+              aria-label="Loading Spinner"
+              data-testid="loader"
+            />
+          )}
         </button>
       </div>
       <Alert />
