@@ -89,10 +89,10 @@ const Sidebar = ({
             onChange={betInput}
             value={betamount}
           />
-          <button className="half font-bold text-sm text-white p-2 cursor-pointer" onClick={()=>{setbetamount(betamount/=2)}}>
+          <button className="half font-bold text-sm text-white p-2 cursor-pointer" onClick={()=>{setbetamount((betamount/2))}}>
             1/2
           </button>
-          <button className="double font-bold text-sm text-white p-2 cursor-pointer" onClick={()=>{setbetamount(betamount*=2)}}>
+          <button className="double font-bold text-sm text-white p-2 cursor-pointer" onClick={()=>{setbetamount((betamount*2>amount)?amount:betamount*2)}}>
             2x
           </button>
         </div>
