@@ -28,7 +28,9 @@ const GamePage = ({ amount, setAmount, user, setUser, username, handleUpdateWall
     setshowProfit(false);
     const response = await cashoutClickApi(user.token, {username});
     const gameArray = response.gameArray;
-    allRevealed(gameArray);
+    if(!startGame){
+      allRevealed(gameArray);
+    }
     setAmount(response.balance);
   };
 
@@ -65,7 +67,9 @@ const GamePage = ({ amount, setAmount, user, setUser, username, handleUpdateWall
         setstartGame(false);
         setcahsoutModalState(true);
         setshowProfit(false);
-        allRevealed(gameArray);
+        if(!startGame){
+          allRevealed(gameArray);
+        }
       }
       setTileResults(newTileResults);
 
