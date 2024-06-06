@@ -15,6 +15,7 @@ const GamePage = ({ amount, setAmount, user, setUser, username, handleUpdateWall
   const [profitMultiple, setprofitMultiple] = useState("1.00");
   const [showProfit, setshowProfit] = useState(false);
   const [betamount, setbetamount] = useState("0.00");
+  const [disableGrid, setDisableGrid] = useState(false);
 
   const resetRevealed = () => {
     setRevealed(Array(25).fill(false));
@@ -33,7 +34,7 @@ const GamePage = ({ amount, setAmount, user, setUser, username, handleUpdateWall
 
 
   const handleTileClick = async (index, e) => {
-    if (startGame) {
+    if (startGame && !disableGrid) {
       const newFetching = [...tileFetching];
       newFetching[index] = true;
       settileFetching(newFetching);
@@ -42,7 +43,9 @@ const GamePage = ({ amount, setAmount, user, setUser, username, handleUpdateWall
 
       const tileCoords = e.target.getAttribute('coords');
       const openTileData = { tileCoords, username };
+      setDisableGrid(true);
       const response = await openTileApi(user.token, openTileData);
+      setDisableGrid(false);
       let gameArray;
       if(response.gameArray){
         gameArray = response.gameArray;
@@ -89,7 +92,6 @@ const GamePage = ({ amount, setAmount, user, setUser, username, handleUpdateWall
         username={username}
         token={token}
       />
-      <div className="warning text-white font-medium text-center my-2 text-lg">Please open the tiles one by one only</div>
       <div className="flex mx-auto my-[5vh] justify-center items-center flex-col-reverse md:flex-row">
         <Sidebar
           startGame={startGame}
