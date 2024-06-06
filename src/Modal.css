@@ -1,0 +1,11 @@
+.main-div{
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9999999;
+}
+
+.inner-div{
+    background-color: #1a2c38;
+}
