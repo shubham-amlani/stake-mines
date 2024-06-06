@@ -16,6 +16,7 @@ const Form = ({setUser}) => {
 };
 
   return (
+    <>
     <div className="form-container">
       <form className="username-form" onSubmit={handleSubmit}>
         <label htmlFor="username" className="form-label">Username</label>
@@ -31,6 +32,7 @@ const Form = ({setUser}) => {
         <button type="submit" className="form-button">Submit</button>
       </form>
     </div>
+    </>
   );
 }
 

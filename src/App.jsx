@@ -4,6 +4,7 @@ import { getWallet, updateWallet, getUsername } from './Api';
 import {jwtDecode} from 'jwt-decode';
 import Form from './components/Form';
 import GamePage from './components/GamePage'
+import Disclamer from './components/Disclamer';
 import './App.css'
 
 const App = () => {
@@ -46,9 +47,15 @@ const App = () => {
     return (
         <div>
             {user ? (
+                <>
                 <GamePage amount={amount} setAmount={setAmount} user={user} setUser={setUser} username={username} token={token} handleUpdateWallet={handleUpdateWallet}/>
+                <Disclamer/>
+                </>
             ) : (
+                <>
                 <Form setUser={setUser} />
+                <Disclamer/>
+                </>
             )}
         </div>
     );
