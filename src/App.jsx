@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Auth from './components/Auth';
-import { getWallet, updateWallet, logout, getUsername } from './Api';
+import { getWallet, updateWallet, getUsername } from './Api';
 import {jwtDecode} from 'jwt-decode';
 import Form from './components/Form';
 import GamePage from './components/GamePage'
@@ -39,14 +39,14 @@ const App = () => {
     };
 
     const handleLogout = async () => {
-        await logout(user.token);
+        // await logout(user.token);
         localStorage.removeItem('token');
         setUser(null);
     };
     return (
         <div>
             {user ? (
-                <GamePage logout={logout} amount={amount} setAmount={setAmount} user={user} setUser={setUser} username={username} token={token} handleUpdateWallet={handleUpdateWallet}/>
+                <GamePage amount={amount} setAmount={setAmount} user={user} setUser={setUser} username={username} token={token} handleUpdateWallet={handleUpdateWallet}/>
             ) : (
                 <Form setUser={setUser} />
             )}

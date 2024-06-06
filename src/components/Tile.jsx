@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import mineLogo from "../assets/mine.svg";
 
 const Tile = ({
@@ -9,14 +9,14 @@ const Tile = ({
   onClick,
   isRevealed,
   result,
+  tileFetching
 }) => {
-  const [isFetching, setIsFetching] = useState(false);
   return (
     <>
       <button
         className={`tile tile-hover lg:w-[7rem] lg:h-[7rem] lg:rounded-lg md:w-[5rem] md:h-[5rem] md:rounded-md sm:w-[5rem] sm:h-[5rem] sm:rounded-md w-[3.2rem] h-[3.2rem] rounded-md
           ${isRevealed ? (result === 'mine' ? 'mine' : 'gem') : 'tile-hover'}
-         ${isFetching ? "fetching" : ""}`}
+         ${tileFetching ? "fetching" : ""}`}
         onClick={(e) => {
           onClick(e, index);
         }}

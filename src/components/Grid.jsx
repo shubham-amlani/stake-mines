@@ -10,7 +10,8 @@ const Grid = ({
   tileResults,
   cahsoutModalState,
   profitMultiple,
-  betamount
+  betamount,
+  tileFetching
 }) => {
   const handleTileClick = async (index, e) => {
     const response = await onTileClick(index, e);
@@ -37,6 +38,7 @@ const Grid = ({
               startGame={startGame}
               setstartGame={setstartGame}
               isRevealed={isRevealed}
+              tileFetching={tileFetching[index]}
               onClick={(e) => onTileClick(index, e)}
               result={tileResults[index]}
             />

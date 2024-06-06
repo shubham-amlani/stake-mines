@@ -172,7 +172,7 @@ select{
 }
 
 .fetching {
-  animation: fetchingAnimation var(--duration) infinite;
+  animation: fetchingAnimation 1s infinite;
 }
 
 @keyframes fetchingAnimation {

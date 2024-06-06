@@ -5,9 +5,9 @@ import { FaUser } from "react-icons/fa";
 import { GiWallet } from "react-icons/gi";
 import Modal from './Modal';
 
-const Navbar = ({logout, amount, setAmount, user, setUser, username, token}) => {
+const Navbar = ({amount, setAmount, user, setUser, username, token}) => {
   const handleLogout = async () => {
-    await logout(user.token);
+    // await logout(user.token);
     localStorage.removeItem('token');
     setUser(null);
 };

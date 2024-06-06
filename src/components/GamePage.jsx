@@ -5,9 +5,10 @@ import Sidebar from "./Sidebar";
 import { playSound } from "./SoundPlayer";
 import { openTileApi, cashoutClickApi } from "../Api";
 
-const GamePage = ({ logout, amount, setAmount, user, setUser, username, handleUpdateWallet, token }) => {
+const GamePage = ({ amount, setAmount, user, setUser, username, handleUpdateWallet, token }) => {
   const [startGame, setstartGame] = useState(false);
   const [revealed, setRevealed] = useState(Array(25).fill(false));
+  const [tileFetching, settileFetching] = useState(Array(25).fill(false));
   const [tileResults, setTileResults] = useState(Array(25).fill(null));
   const [cahsoutModalState, setcahsoutModalState] = useState(false);
   const [oneTileOpened, setoneTileOpened] = useState(false);
@@ -33,16 +34,20 @@ const GamePage = ({ logout, amount, setAmount, user, setUser, username, handleUp
 
   const handleTileClick = async (index, e) => {
     if (startGame) {
-      setoneTileOpened(true);
+      const newFetching = [...tileFetching];
+      newFetching[index] = true;
+      settileFetching(newFetching);
 
-      const newRevealed = [...revealed];
-      newRevealed[index] = true;
-      setRevealed(newRevealed);
+      setoneTileOpened(true);
   
       const tileCoords = e.target.getAttribute('coords');
       const openTileData = { tileCoords, username };
       const response = await openTileApi(user.token, openTileData);
+
       setprofitMultiple(response.profit);
+      const newRevealed = [...revealed];
+      newRevealed[index] = true;
+      setRevealed(newRevealed);
   
       const newTileResults = [...tileResults];
       if (response.gem) {
@@ -58,6 +63,9 @@ const GamePage = ({ logout, amount, setAmount, user, setUser, username, handleUp
         setshowProfit(false);
       }
       setTileResults(newTileResults);
+
+      newFetching[index] = false;
+      settileFetching(newFetching);
     }
   };
 
@@ -70,7 +78,6 @@ const GamePage = ({ logout, amount, setAmount, user, setUser, username, handleUp
   return (
     <>
       <Navbar
-        logout={logout}
         amount={amount}
         setAmount={setAmount}
         user={user}
@@ -112,6 +119,7 @@ const GamePage = ({ logout, amount, setAmount, user, setUser, username, handleUp
           profitMultiple={profitMultiple}
           betamount={betamount}
           setbetamount={setbetamount}
+          tileFetching={tileFetching}
         />
 
       </div>
