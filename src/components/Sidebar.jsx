@@ -25,7 +25,8 @@ const Sidebar = ({
   setbetamount,
   cashoutClick,
   loading,
-  setloading
+  setloading,
+  disableGrid
 }) => {
   const [Mines, setMines] = useState(3);
 
@@ -139,7 +140,7 @@ const Sidebar = ({
         )}
         <button
           className="bet-btn font-bold text-sm w-[90%] mx-4 my-3 h-12 rounded-md"
-          disabled={(!oneTileOpened && startGame) || loading}
+          disabled={(!oneTileOpened && startGame) || loading || disableGrid}
           onClick={startGame ? cashoutClick : betClick}
         >
           {!loading ? (

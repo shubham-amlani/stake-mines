@@ -122,6 +122,7 @@ const GamePage = ({ amount, setAmount, user, setUser, username, handleUpdateWall
           cashoutClick={cashoutClick}
           loading={loading}
           setloading={setloading}
+          disableGrid={disableGrid}
         />
 
         <Grid
