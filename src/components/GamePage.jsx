@@ -86,6 +86,7 @@ const GamePage = ({ amount, setAmount, user, setUser, username, handleUpdateWall
         username={username}
         token={token}
       />
+      <div className="warning text-white font-medium">Please open the tiles one by one only</div>
       <div className="flex mx-auto my-[5vh] justify-center items-center flex-col-reverse md:flex-row">
         <Sidebar
           startGame={startGame}
