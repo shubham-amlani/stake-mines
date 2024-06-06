@@ -16,6 +16,7 @@ const GamePage = ({ amount, setAmount, user, setUser, username, handleUpdateWall
   const [showProfit, setshowProfit] = useState(false);
   const [betamount, setbetamount] = useState("0.00");
   const [disableGrid, setDisableGrid] = useState(false);
+  const [loading, setloading] = useState(false);
 
   const resetRevealed = () => {
     setRevealed(Array(25).fill(false));
@@ -26,12 +27,13 @@ const GamePage = ({ amount, setAmount, user, setUser, username, handleUpdateWall
     setstartGame(false);
     setcahsoutModalState(true);
     setshowProfit(false);
+    setloading(true);
     const response = await cashoutClickApi(user.token, {username});
     const gameArray = response.gameArray;
-    if(!startGame){
-      allRevealed(gameArray);
-    }
+    console.log(startGame)
+    allRevealed(gameArray);
     setAmount(response.balance);
+    setloading(false);
   };
 
 
@@ -62,14 +64,15 @@ const GamePage = ({ amount, setAmount, user, setUser, username, handleUpdateWall
         newTileResults[index] = 'gem';
         playSound("/sounds/gem.mp3");
       } else if (response.mine) {
+        setloading(true);
         newTileResults[index] = 'mine';
         playSound("/sounds/mine.mp3");
         setstartGame(false);
         setcahsoutModalState(true);
         setshowProfit(false);
-        if(!startGame){
-          allRevealed(gameArray);
-        }
+        console.log(startGame)
+        allRevealed(gameArray);
+        setloading(false);
       }
       setTileResults(newTileResults);
 
@@ -117,6 +120,8 @@ const GamePage = ({ amount, setAmount, user, setUser, username, handleUpdateWall
           betamount={betamount}
           setbetamount={setbetamount}
           cashoutClick={cashoutClick}
+          loading={loading}
+          setloading={setloading}
         />
 
         <Grid

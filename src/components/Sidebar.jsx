@@ -24,9 +24,10 @@ const Sidebar = ({
   betamount,
   setbetamount,
   cashoutClick,
+  loading,
+  setloading
 }) => {
   const [Mines, setMines] = useState(3);
-  const [loading, setloading] = useState(false);
 
   const betClick = async () => {
     if (amount < betamount) {
