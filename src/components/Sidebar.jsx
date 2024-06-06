@@ -139,7 +139,7 @@ const Sidebar = ({
         )}
         <button
           className="bet-btn font-bold text-sm w-[90%] mx-4 my-3 h-12 rounded-md"
-          disabled={!oneTileOpened && startGame}
+          disabled={(!oneTileOpened && startGame) || loading}
           onClick={startGame ? cashoutClick : betClick}
         >
           {!loading ? (
@@ -151,7 +151,6 @@ const Sidebar = ({
           ) : (
             <ClipLoader
               loading={loading}
-              disabled={loading}
               size={20}
               className="loading"
               aria-label="Loading Spinner"
