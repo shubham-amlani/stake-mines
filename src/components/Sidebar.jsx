@@ -151,6 +151,7 @@ const Sidebar = ({
           ) : (
             <ClipLoader
               loading={loading}
+              disabled={loading}
               size={20}
               className="loading"
               aria-label="Loading Spinner"
