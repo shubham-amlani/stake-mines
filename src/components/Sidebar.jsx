@@ -88,11 +88,13 @@ const Sidebar = ({
             className="rounded-sm m-0.5 h-9 text-white font-bold text-sm p-2 w-[70%]"
             onChange={betInput}
             value={betamount}
+            readOnly={startGame || loading}
+            disabled={startGame || loading}
           />
-          <button className="half font-bold text-sm text-white p-2 cursor-pointer" onClick={()=>{setbetamount((betamount/2))}}>
+          <button className="half font-bold text-sm text-white p-2 cursor-pointer" disabled={startGame || loading} onClick={()=>{setbetamount((betamount/2))}}>
             1/2
           </button>
-          <button className="double font-bold text-sm text-white p-2 cursor-pointer" onClick={()=>{setbetamount((betamount*2>amount)?amount:betamount*2)}}>
+          <button className="double font-bold text-sm text-white p-2 cursor-pointer" disabled={startGame || loading} onClick={()=>{setbetamount((betamount*2>amount)?amount:betamount*2)}}>
             2x
           </button>
         </div>
@@ -107,6 +109,8 @@ const Sidebar = ({
             className="rounded-sm h-9 text-white font-bold text-sm p-2 w-full"
             onChange={mineInput}
             value={Mines}
+            // readOnly={startGame || loading}
+            disabled={startGame || loading}
           >
             {Array.from({ length: 24 }, (_, index) => (
               <option value={index + 1} key={index}>
