@@ -21,6 +21,7 @@ const Tile = ({
           onClick(e, index);
         }}
         coords={coords}
+        disabled={tileFetching || isRevealed}
       >
         {isRevealed && (
           <>
