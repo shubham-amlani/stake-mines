@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 60vh;
+    height: auto;
     background-color: #1a2c38;
   }
   
